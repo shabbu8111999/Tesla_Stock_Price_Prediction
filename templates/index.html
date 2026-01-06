@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-
+<html>
 <head>
     <title>Tesla Stock Predictor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2">
 </head>
 
 <body>
     <div class="container">
+
         <h2>Tesla Stock Price Prediction</h2>
 
         <form method="post">
@@ -15,22 +16,59 @@
                 <option value="lstm">LSTM</option>
             </select>
 
-            <input type="number" name="days" placeholder="Days (1 / 5 / 10)" required>
+            <input type="number" name="days" placeholder="Number of future days (e.g., 7, 14, 30)" required>
             <button type="submit">Predict</button>
         </form>
 
-        {% if prediction is not none %}
-    <h3>Predicted Prices</h3>
-    <ul>
-        {% for p in prediction %}
-            <li>{{ p[0] }}</li>
-        {% endfor %}
-    </ul>
+        <!-- Error Message -->
+        {% if error_message %}
+            <div class="error-box">
+                {{ error_message }}
+            </div>
         {% endif %}
 
+        <!-- Prediction Results -->
+        {% if prediction is not none %}
+            <h3>Predicted Prices (with Confidence Range)</h3>
+
+            <table border="1" cellpadding="6">
+                <tr>
+                    <th>Date</th>
+                    <th>Predicted Price</th>
+                    <th>Lower Bound</th>
+                    <th>Upper Bound</th>
+                </tr>
+
+                {% for row in prediction %}
+                <tr>
+                    <td>{{ row.date }}</td>
+                    <td>{{ row.price }}</td>
+                    <td>{{ row.low }}</td>
+                    <td>{{ row.high }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <!-- Model Comparison -->
+            <div class="comparison-box">
+                <h4>Model Comparison Insight</h4>
+                <p>
+                    SimpleRNN captures short-term patterns but struggles with long-term
+                    dependencies. LSTM performs better by retaining important information
+                    over longer time steps, making it more suitable for stock price prediction.
+                </p>
+            </div>
+
+            <!-- Prediction Plot -->
+            {% if plot_url %}
+                <img src="{{ url_for('static', filename=plot_url) }}" width="600">
+            {% endif %}
+        {% endif %}
 
         <div class="footer">
             Tesla Stock Prediction using RNN & LSTM
         </div>
+
     </div>
 </body>
+</html>

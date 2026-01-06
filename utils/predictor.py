@@ -48,3 +48,13 @@ def predict_future(model, last_sequence, days, scaler):
 
         # Return None to safely handle failure
         return None
+
+def add_confidence_range(predictions, percentage=0.02):
+    """
+    Adds an approximate confidence range to predictions.
+    percentage = 0.02 means ±2%
+    """
+    lower = predictions * (1 - percentage)
+    upper = predictions * (1 + percentage)
+
+    return lower, upper

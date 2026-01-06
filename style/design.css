@@ -1,0 +1,78 @@
+/* Basic reset */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center container */
+.container {
+    width: 420px;
+    margin: 80px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h2 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #444444;
+    margin-top: 20px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+select,
+input[type="number"] {
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Button */
+button {
+    padding: 10px;
+    background-color: #1f77b4;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #155a8a;
+}
+
+/* Prediction output */
+ul {
+    padding-left: 18px;
+}
+
+li {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #222222;
+}
+
+/* Footer text (optional) */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #777777;
+    margin-top: 15px;
+}

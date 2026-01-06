@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Tesla Stock Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Tesla Stock Price Prediction</h2>
+
+        <form method="post">
+            <select name="model">
+                <option value="rnn">SimpleRNN</option>
+                <option value="lstm">LSTM</option>
+            </select>
+
+            <input type="number" name="days" placeholder="Days (1 / 5 / 10)" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction is not none %}
+    <h3>Predicted Prices</h3>
+    <ul>
+        {% for p in prediction %}
+            <li>{{ p[0] }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+
+
+        <div class="footer">
+            Tesla Stock Prediction using RNN & LSTM
+        </div>
+    </div>
+</body>

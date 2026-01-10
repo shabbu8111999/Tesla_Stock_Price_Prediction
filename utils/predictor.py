@@ -14,15 +14,12 @@ def predict_future(model, last_sequence, days, scaler):
         predictions = []
 
         # Reshape the last known sequence into (60, 1)
-        # 60  -> number of past days (time steps)
-        # 1   -> number of features (only Close price)
         current_seq = last_sequence.reshape(60, 1)
 
         # Loop to predict prices for the given number of future days
         for _ in range(days):
 
             # Reshape input into 3D format required by RNN/LSTM
-            # Shape: (batch_size = 1, time_steps = 60, features = 1)
             pred = model.predict(
                 current_seq.reshape(1, 60, 1),
                 verbose=0  # Suppress prediction logs
@@ -32,8 +29,6 @@ def predict_future(model, last_sequence, days, scaler):
             predictions.append(pred[0][0])
 
             # Update the sequence for the next prediction
-            # - Remove the first (oldest) value
-            # - Append the new predicted value at the end
             current_seq = np.vstack([
                 current_seq[1:],       # drop the oldest value
                 [[pred[0][0]]]          # add the new prediction
